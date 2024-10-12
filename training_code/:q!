@@ -1,0 +1,65 @@
+DATASET="/nobackup2/anirudh/datasets/corvi_ldm_inv"
+CORVI_DSET="/nobackup2/anirudh/datasets/latent_diffusion_trainingset"
+ADM_DATASET="/nobackup/anirudh/datasets/adm_pixel_space_dataset"
+ADM_INV="/nobackup/anirudh/datasets/adm_pixel_space_inv_dataset"
+SHADERS="/nobackup2/anirudh/datasets/shaders"
+dino_r50="/nobackup3/anirudh/DMimageDetection/training_code/pretrained_weights/resnet50/dino_resnet50_pretrain.pth"
+SHADERS_21K="/nobackup2/anirudh/datasets/Shaders21k/shaders_inv"
+SHADERS_BASELINE="/nobackup2/anirudh/datasets/Shaders21k/shaders_baseline"
+SHADERS_PNG="/nobackup2/anirudh/datasets/Shaders21k/shaders_inv_png"
+export CUDA_VISIBLE_DEVICES=5
+SHADE_NAME="shaders_iclr_png/100k/shaders_inv"
+NAME="pixel_space_corvi/adm_inv"
+LDM_NAME="ldm/corvi_ldm_flex/"
+LDM_DS_NAME="s10_datasize_ablations_s17/corvi_inv_1k_sync"
+
+
+#CUDA_VISIBLE_DEVICES=2 python train.py --name=$LDM_DS_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $DATASET --batch_size 64 --earlystop_epoch 10 --use_inversions --seed 17 --batched_syncing --data_cap=1000
+
+
+#CUDA_VISIBLE_DEVICES=6 python train.py --name=$LDM_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 1.0 --rot90_prob 1.0 --dataroot $CORVI_DSET --batch_size 128 --earlystop_epoch 10 --seed 33 --flex_rz #--use_inversions
+
+
+
+
+#CUDA_VISIBLE_DEVICES=0 python train.py --name=$SHADE_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5  --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $SHADERS_BASELINE --batch_size 128 --earlystop_epoch 10 --seed 17 #--use_inversions
+
+CUDA_VISIBLE_DEVICES=4 python train.py --name=$SHADE_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5  --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $SHADERS_PNG --batch_size 128 --earlystop_epoch 5 --use_inversions --seed 19 #--batched_syncing
+
+
+#CUDA_VISIBLE_DEVICES=2 python train.py --name=$NAME --arch res50nodown --cropSize 32  --norm_type resnet --resize_size 138 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $ADM_DATASET --batch_size 1500 --earlystop_epoch 5 --data_cap 71884 --seed 17
+
+
+#CUDA_VISIBLE_DEVICES=2 python train.py --name=$NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 138 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.0 --jitter_prob  0.8 --colordist_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $ADM_INV --batch_size 128 --earlystop_epoch 5 --data_cap 71884 --use_inversions --seed 18
+
+
+#CUDA_VISIBLE_DEVICES=3 python train.py --name=$NAME --arch res50nodown --cropSize 32  --norm_type resnet --blur_prob 0.5 --blur_sig 0.0,3.0 --cmp_prob 0.5 --cmp_method cv2,pil --cmp_qual 30,100 --dataroot $ADM_DATASET --batch_size 1500 --earlystop_epoch 5 --data_cap 71884 --seed 17 #--use_inversions
+
+#CUDA_VISIBLE_DEVICES=0 python train.py --name=$NAME --arch res50nodown --cropSize 96  --norm_type resnet --blur_prob 0.5 --blur_sig 0.0,3.0 --cmp_prob 0.5 --cmp_method cv2,pil --cmp_qual 30,100 --dataroot $ADM_INV --batch_size 128 --earlystop_epoch 5 --data_cap 71884 --use_inversions --seed 17
+
+
+#CUDA_VISIBLE_DEVICES=4 python train.py --name=$NAME --arch res50nodown --cropSize 96  --resize_size 138 --resize_prob 0.2  --norm_type resnet --blur_prob 0.5 --blur_sig 0.0,3.0 --cmp_prob 0.5 --cmp_method cv2,pil --cmp_qual 30,100 --dataroot $ADM_INV --batch_size 128 --earlystop_epoch 10 --data_cap 71884 --use_inversions --seed 17
+
+
+
+
+#CUDA_VISIBLE_DEVICES=4 python train.py --name=$LDM_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $DATASET --batch_size 128 --earlystop_epoch 10 --data_cap 100000 --use_inversions --seed 18
+
+
+#CUDA_VISIBLE_DEVICES=7 python train.py --name=$LDM_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $CORVI_DSET --batch_size 128 --earlystop_epoch 10 --data_cap 100000 --seed 18 #--use_inversions
+
+#CUDA_VISIBLE_DEVICES=1 python train.py --name=$NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 138 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $ADM_DATASET --batch_size 256 --earlystop_epoch 10 --data_cap 71884 --seed 17 #--use_inversions
+
+#CUDA_VISIBLE_DEVICES=2 python train.py --name=$NAME --arch res50nodown --cropSize 64  --norm_type resnet --resize_size 138 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $ADM_INV --batch_size 256 --earlystop_epoch 10 --data_cap 71884 --use_inversions --seed 17
+
+
+
+
+#CUDA_VISIBLE_DEVICES=6 python train.py --name=$LDM_NAME --arch res50nodown --cropSize 96  --norm_type resnet --resize_size 256 --resize_ratio 0.75 --blur_sig 0.0,3.0 --cmp_method cv2,pil --cmp_qual 30,100 --resize_prob 0.2 --jitter_prob  0.8 --colordist_prob 0.2 --cutout_prob 0.2 --noise_prob 0.2 --blur_prob 0.5 --cmp_prob 0.5 --rot90_prob 1.0 --dataroot $CORVI_DSET --batch_size 128 --earlystop_epoch 10 #--use_inversions
+
+
+
+
+
+
+
