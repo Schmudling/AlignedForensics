@@ -1,7 +1,7 @@
 # On the Effectiveness of Dataset Alignment for Fake Image Detection
 
 
-This is the official training code of the paper [On the Effectiveness of Dataset Alignment for Fake Image Detection]([https://arxiv.org/abs/2211.00680](https://arxiv.org/abs/2410.11835)).
+This is the official training code of the paper [On the Effectiveness of Dataset Alignment for Fake Image Detection([https://arxiv.org/abs/2211.00680](https://arxiv.org/abs/2410.11835)).
 Anirudh Sundara Rajan, Utkarsh Ojha, Jedidiah Schloesser, Yong Jae Lee
 
 ## Traning-set
