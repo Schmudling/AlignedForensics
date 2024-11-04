@@ -9,7 +9,11 @@ This is the official training code of the paper [On the Effectiveness of Dataset
 Our real images come from MS-COCO and LSUN. The dataset can be downloaded from the [CNNDetection](https://github.com/PeterWang512/CNNDetection) repository. We use the training-validation split used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) for our experiments.
 
 #### 2) Latent Reconstructions
-Our training fake images are obtained by using the Latent Diffusion VAE, for validation, we use the same images used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) to maintain experiment consistency.
+Our training fake images are obtained by using the Latent Diffusion VAE, for validation, we use the same images used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) to maintain experiment consistency. The scripts to reconstruct the dataset can be found in the **recon** folder. The reconstructions can be computed as follows,
+```
+./recon/run.sh
+```
+
 ```
 Dataset directory
 |--train
