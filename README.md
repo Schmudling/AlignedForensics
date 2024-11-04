@@ -5,8 +5,8 @@ Official repository of [On the Effectiveness of Dataset Alignment for Fake Image
 ## Pretrained Models
 
 Our pre-trained fake image detectors can be found below,
-- [Ours](https://drive.google.com/file/d/11FHMSziQwEaGPPUbrU8J_aIWjKmxoFOj/view?usp=sharing) (ResNet-50 trained without sync'd batches)
-- [Ours-Sync](https://drive.google.com/file/d/1_eku8XOzDjKFKRYf-ZAtKsthJrkI4lJ6/view?usp=sharing) (ResNet-50 trained with sync'd batches)
-- [Ours (shaders)](https://drive.google.com/file/d/1dnMgojE1_euE1QJunu58yBNaxz8oogk3/view?usp=sharing) (ResNet-50 trained on shaders)
-- [Ours-Sync (shaders)](https://drive.google.com/file/d/1iSzFldol0BTuZ0tU0-ZTRr9ql-3EKS_6/view?usp=sharing) (ResNet-50 trained on shaders, with sync'd batches)
+- [Ours](https://drive.google.com/file/d/1ACoiwC8BM0NpyhAwbKsyAk1Da-TAoRRy/view?usp=sharing) (ResNet-50 trained without sync'd batches)
+- [Ours-Sync](https://drive.google.com/file/d/1rn0hgAjTXeY7QTpCnx9lMGNPfrwvO1lO/view?usp=sharing) (ResNet-50 trained with sync'd batches)
+- [Ours (shaders)](https://drive.google.com/file/d/1pqM8z10--509vS98yNTebI8OzvDqLPgI/view?usp=sharing) (ResNet-50 trained on shaders)
+- [Ours-Sync (shaders)](https://drive.google.com/file/d/1wDZe_P5xiAbELZLV-PmYK5Hkh_BG6Eah/view?usp=sharing) (ResNet-50 trained on shaders, with sync'd batches)
 
