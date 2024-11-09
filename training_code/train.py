@@ -1,20 +1,3 @@
-'''                                                     
-Copyright 2024 Image Processing Research Group of University Federico
-II of Naples ('GRIP-UNINA'). All rights reserved.            
-                                                        
-Licensed under the Apache License, Version 2.0 (the "License");       
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at    
-                                           
-    http://www.apache.org/licenses/LICENSE-2.0
-                        
-Unless required by applicable law or agreed to in writing, software   
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implie
-d.                                         
-See the License for the specific language governing permissions and
-limitations under the License.                        
-'''
 
 import os
 import tqdm
@@ -28,7 +11,7 @@ import argparse
 import torch
 from utils.training import add_training_arguments
 from utils.dataset import add_dataloader_arguments
-#torch.manual_seed(17)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -55,12 +38,9 @@ if __name__ == "__main__":
     print("#   training batches = %d" % len(train_data_loader))
     model = TrainingModel(opt, subdir=opt.name)
     writer = SummaryWriter(os.path.join(model.save_dir, "logs"))
-    #CHANGE BACKJ TO //32
-    #writer_loss_steps = len(train_data_loader) // 32
-    writer_loss_steps = len(train_data_loader) // 1
+    writer_loss_steps = len(train_data_loader) // 32
     early_stopping = None
     start_epoch = model.total_steps // len(train_data_loader)
-    print('______________________VVVVVVVVVVVVVVVV___________________')
 
     for epoch in range(start_epoch, opt.num_epoches+1):
         if  epoch > start_epoch:
@@ -79,23 +59,16 @@ if __name__ == "__main__":
         # Validation
         print("Validation ...", flush=True)
         y_true, y_pred, y_path = model.predict(valid_data_loader)
-        print(y_true)
-        print('*********************************************************************')
-        print(y_pred)
+
         acc = balanced_accuracy_score(y_true, y_pred > 0.0)
-        #CUSTOM SETTING multi_class='ovr'
-        #auc = roc_auc_score(y_true, y_pred, multi_class='ovr')
         lr = model.get_learning_rate()
         writer.add_scalar("lr", lr, model.total_steps)
         
         writer.add_scalar("valid/accuracy", acc, model.total_steps)
         
-
-        #writer.add_scalar("valid/auc", auc, model.total_steps)
         
         print("After {} epoches: val acc = {}".format(epoch, acc), flush=True)
         
-        #print("After {} epoches: val acc = {}; val auc = {}".format(epoch, acc, auc), flush=True)
 
         # Early Stopping
         if early_stopping is None:
