@@ -1,5 +1,6 @@
 import os
 import csv
+import argparse
 
 def create_csv_from_folder(base_folder, output_csv, dir=''):
     data = []
@@ -18,7 +19,19 @@ def create_csv_from_folder(base_folder, output_csv, dir=''):
         csvwriter.writerow(['filename', 'typ'])
         csvwriter.writerows(data)
 
-# Usage
-base_folder = '/nobackup/anirudh/datasets/evaluations/sd_pure/1_fake'
-output_csv = 'data/sdpure_fake.csv'
-create_csv_from_folder(base_folder, output_csv, dir='fake')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate a CSV file from images in a folder.")
+    parser.add_argument("base_folder", type=str, help="Path to the base folder containing images.")
+    parser.add_argument("output_csv", type=str, help="Output CSV file path.")
+    parser.add_argument("--dir", type=str, default='', help="Optional type label for the images.")
+
+    args = parser.parse_args()
+    create_csv_from_folder(args.base_folder, args.output_csv, dir=args.dir)
+
+
+
+
+
+
+
+
