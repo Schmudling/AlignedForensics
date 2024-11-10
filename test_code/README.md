@@ -18,6 +18,6 @@ python main.py --in_csv {images csv file} --out_csv {output csv file} --device '
 In order to run these evaluations parallely, use the ```run_tests.py``` script. The returned csv files contains the scores given by the neural networks. 
 
 ## Resolution/Compression sweeps
-We also provide the code to recreate the resolution/webp-compression diagrams given in the paper. An example use case can be found in the
+We also provide the code to recreate the resolution/webp-compression diagrams given in the paper. Examples can be found in the ```sweep.sh``` script. 
 
 
