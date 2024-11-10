@@ -11,7 +11,8 @@ Our real images come from MS-COCO and LSUN. The dataset can be downloaded from t
 #### 2) Latent Reconstructions
 Our training fake images are obtained by using the Latent Diffusion VAE, for validation, we use the same images used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) to maintain experiment consistency. The scripts to reconstruct the dataset can be found in the **recon** folder. It is important to save the reconstructions using the same name as the corresponding real image as we pair them based on their names. The reconstructions can be computed as by running the script as follows,
 ```
-./recon/run.sh
+cd recon
+./run.sh
 ```
 
 The dataset structure we use is the same as the DMimageDetection. 
@@ -58,7 +59,7 @@ CUDA_VISIBLE_DEVICES=2 python train.py --name=$LDM_DS_NAME --arch res50nodown --
 These details are provided in the bash script. 
 
 ```
-./script_train_test.sh
+./script_train.sh
 
 ```
 
