@@ -6,7 +6,7 @@ This is the official training code of the paper [On the Effectiveness of Dataset
 ## Training-set
 
 #### 1) Real Images
-Our real images come from MS-COCO and LSUN. The dataset can be downloaded from the [CNNDetection](https://github.com/PeterWang512/CNNDetection) repository. We use the training-validation split used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) for our experiments.
+Our real images come from MS-COCO and LSUN. The dataset can be downloaded by following the instructions provided in the [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) repository. We use their train-validation split as well. Throughout our experiments we keep the validation data consistent.
 
 #### 2) Latent Reconstructions
 Our training fake images are obtained by using the Latent Diffusion VAE, for validation, we use the same images used by [DMimageDetection](https://github.com/grip-unina/DMimageDetection/tree/main) to maintain experiment consistency. The scripts to reconstruct the dataset can be found in the **recon** folder. It is important to save the reconstructions using the same name as the corresponding real image as we pair them based on their names. The reconstructions can be computed as by running the script as follows,
@@ -67,6 +67,8 @@ By default the code creates a folder called checkpoints in the current directory
 ```
 --checkpoints_dir /path/to/weights/folder
 ```
+## Shaders experiments
+The shaders dataset and reconstructions that we train on can be found here. We use the same validation set as used in the other expriments, we compute the evaluation threshold on a random subset of 5000 real and fake images taken from the validation data.
 
 ## License
 
