@@ -9,9 +9,7 @@ from diffusers import StableDiffusion3Pipeline
 import torchvision.transforms as transforms
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def reconstruct_simple(x, ae, seed, steps=None, tools=None):
-    #decode_dtype = next(iter(ae.post_quant_conv.parameters())).dtype
     decode_dtype = ae.dtype
-    #decode_dtype = next(iter(ae..parameters())).dtype
     generator = torch.Generator().manual_seed(seed)
     x = x.to(dtype=ae.dtype) * 2.0 - 1.0
     latents = retrieve_latents(ae.encode(x), generator=generator)
@@ -25,41 +23,14 @@ def reconstruct_simple(x, ae, seed, steps=None, tools=None):
 
 def get_vae(repo_id, return_full=False):
     if 'ldm' in repo_id:
-        pipe = DiffusionPipeline.from_pretrained("CompVis/ldm-text2im-large-256")
-        if return_full:
-            scheduler = DDIMScheduler.from_pretrained("CompVis/ldm-text2im-large-256", subfolder="scheduler")
-            scheduler.set_timesteps(100)
-            return pipe.vqvae.to(device), pipe.bert.to(device), pipe.tokenizer, pipe.unet.to(device), scheduler
-        else:
-            return pipe.vqvae
+        pipe = DiffusionPipeline.from_pretrained("CompVis/ldm-text2im-large-256", cache_dir="weights")
+        return pipe.vqvae
     elif 'stable-diffusion-3' in repo_id:
         pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16,cache_dir='weights')
         return pipe.vae
         #pipe = pipe.to("cuda")
 
 
-    elif 'playground' in repo_id:
-        pipe = StableDiffusionXLImg2ImgPipeline.from_pretrained(
-                                                                "playgroundai/playground-v2.5-1024px-aesthetic", torch_dtype=torch.float16,
-                                                                cache_dir='/nobackup2/anirudh/datasets/evaluations/playground/weights'
-                                                                )
-        return pipe
-
-    else:
-        print('here')
-        pipe = AutoPipelineForText2Image.from_pretrained(
-            repo_id,
-            torch_dtype=torch.float16,
-            use_safetensors=True,
-            variant="fp16" if "kandinsky-2" not in repo_id else None,
-        )
-        if return_full:
-            scheduler = DDIMScheduler.from_pretrained(repo_id, subfolder="scheduler")
-            scheduler.set_timesteps(100)
-            print(pipe)
-            return pipe.vae.to(device), pipe.text_encoder.to(device), pipe.tokenizer, pipe.unet.to(device), scheduler
-        else:                      
-            return pipe.vae
 
 
 @torch.no_grad()
