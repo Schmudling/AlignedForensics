@@ -14,7 +14,6 @@ import json
 import io
 from PIL import Image
 import seaborn as sns
-from custom_transforms import DiagonalShift
 from torchvision.transforms  import CenterCrop, Resize, Compose, InterpolationMode
 from utils.processing import make_normalize
 from utils.fusion import apply_fusion
@@ -63,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument("--out_path", type=str, help="Path to save the plot", default='plots')
     parser.add_argument("--setting", type=str, help="Enter either res or qual, based on whether to sweep resolution or quality", default='res')
     parser.add_argument("--weights_dir", type=str, help="The directory to the networks weights", default="./weights/")
-    parser.add_argument("--models", type=str, help="List of models to test", default='post_iclr/lp/inv_sync_ldm,post_iclr/icml/inv_sync_ldm_staypos_relu,post_iclr/icml/inv_sync_ldm_staypos_relu_lay4')
+    parser.add_argument("--models", type=str, help="List of models to test", default='ours,ours-sync')
     parser.add_argument("--device", type=str, help="Torch device", default='cuda:0')
     parser.add_argument("--start", type=float, help="Starting setting", default=256)
     parser.add_argument("--end", type=float, help="Final setting", default=1024)
@@ -89,14 +88,14 @@ if __name__ == "__main__":
         x = list(range(int(args['start']), int(args['end'])+1, args['stride']))
         sweeper = 'Webp compression quality'
 
-     x = [t * (args['start']/args['base_res']) for t in x]
+    x = [t * (args['start']/args['base_res']) for t in x]
     if args['setting'] == 'res':
         y_label = 'Probability of Image Being Fake'
-        x_labe = 'Scaling Factor'
+        x_label = 'Scaling Factor'
     elif args['setting'] == 'qual':
         x = list(range(int(args['start']), int(args['end'])+1, int(args['stride'])))        
         y_label = 'Probability of Image Being Fake'
-        x_labe = 'Scaling Factor'
+        x_label = 'Scaling Factor'
         plot_means(models_dict=real_probs, x_values=x, x_label='Compression Quality',
                    y_label='Probability of Image Being Fake', title='Real Images', 
                    filename=os.path.join(args["out_path"],'real_means.png'))

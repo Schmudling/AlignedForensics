@@ -134,17 +134,6 @@ def load_datasets_with_compression(models_list, real_folder, fake_folder, start_
     return real_probs, fake_probs
 
 
-def drop_least_significant_bits(image, bits_to_drop, drop_single=False):
-    # Create a mask to drop the least significant bits
-    mask = 255 << bits_to_drop
-    if drop_single:
-        mask = ~(1 << bits_to_drop)
-        #new_number = number & mask
-        #mask = ~(1 << bits_to_drop)
-    # Apply the mask to each channel of the image
-    quantized_image = np.bitwise_and(np.array(image), mask).astype(np.uint8)
-    return Image.fromarray(quantized_image)
-
 
 def create_transform(resolution):
     return transforms.Compose([
@@ -176,17 +165,18 @@ def load_datasets_with_resolutions(models_list,real_folder, fake_folder, start_r
         elif res<500:
             bs=30
         else:
-            bs=10
+            bs=5
         real_loader = DataLoader(real_dataset, batch_size=bs, shuffle=True)
         fake_loader = DataLoader(fake_dataset, batch_size=bs, shuffle=True)
+        
         with torch.no_grad():
-            real_stats = run_models(models_dict, real_loader,device=args['device'])
-            fake_stats = run_models(models_dict, fake_loader,device=args['device'])
-        #print(fake_stats)
+            real_stats = run_models_adv(models_dict, real_loader, device=args['device'])
+            fake_stats = run_models_adv(models_dict, fake_loader, device=args['device'])
+
         for key in models_dict.keys():
             for key_in in real_stats[key].keys():
                 real_probs[key][key_in].append(real_stats[key][key_in])
                 fake_probs[key][key_in].append(fake_stats[key][key_in])
-
+        
     return real_probs, fake_probs
 
