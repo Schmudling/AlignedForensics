@@ -117,8 +117,8 @@ if __name__ == "__main__":
     parser.add_argument("--in_csv"     , '-i', type=str, help="The path of the input csv file with the list of images")
     parser.add_argument("--out_csv"    , '-o', type=str, help="The path of the output csv file", default="./results.csv")
     parser.add_argument("--weights_dir", '-w', type=str, help="The directory to the networks weights", default="./weights")
-    parser.add_argument("--models"     , '-m', type=str, help="List of models to test", default='clipdet_latent10k_plus,Corvi2023')
-    parser.add_argument("--fusion"     , '-f', type=str, help="Fusion function", default='soft_or_prob')
+    parser.add_argument("--models"     , '-m', type=str, help="List of models to test", default='ours,ours-sync')
+    parser.add_argument("--fusion"     , '-f', type=str, help="Fusion function", default=None)
     parser.add_argument("--device"     , '-d', type=str, help="Torch device", default='cuda:0')
     args = vars(parser.parse_args())
     
@@ -128,8 +128,6 @@ if __name__ == "__main__":
         args['models'] = args['models'].split(',')
     
     table = runnig_tests(args['in_csv'], args['weights_dir'], args['models'], args['device'])
-    if args['fusion'] is not None:
-        table['fusion'] = apply_fusion(table[args['models']].values, args['fusion'], axis=-1)
     
     output_csv = args['out_csv']
     os.makedirs(os.path.dirname(os.path.abspath(output_csv)), exist_ok=True)
