@@ -21,3 +21,16 @@ In order to run these evaluations parallely, use the ```run_tests.py``` script. 
 We also provide the code to recreate the resolution/webp-compression diagrams given in the paper. Examples can be found in the ```sweep.sh``` script. 
 
 
+## Citation
+If you find this code useful in your research, consider citing our work:
+```
+@misc{rajan2024effectivenessdatasetalignmentfake,
+      title={On the Effectiveness of Dataset Alignment for Fake Image Detection}, 
+      author={Anirudh Sundara Rajan and Utkarsh Ojha and Jedidiah Schloesser and Yong Jae Lee},
+      year={2024},
+      eprint={2410.11835},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2410.11835}, 
+}
+```
