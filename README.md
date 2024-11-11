@@ -10,3 +10,16 @@ Our pre-trained fake image detectors can be found below,
 - [Ours (shaders)](https://drive.google.com/file/d/1pqM8z10--509vS98yNTebI8OzvDqLPgI/view?usp=sharing) (ResNet-50 trained on shaders)
 - [Ours-Sync (shaders)](https://drive.google.com/file/d/1wDZe_P5xiAbELZLV-PmYK5Hkh_BG6Eah/view?usp=sharing) (ResNet-50 trained on shaders, with sync'd batches)
 
+## Citation
+If you find this code useful in your research, consider citing our work:
+```
+@misc{rajan2024effectivenessdatasetalignmentfake,
+      title={On the Effectiveness of Dataset Alignment for Fake Image Detection}, 
+      author={Anirudh Sundara Rajan and Utkarsh Ojha and Jedidiah Schloesser and Yong Jae Lee},
+      year={2024},
+      eprint={2410.11835},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2410.11835}, 
+}
+```
