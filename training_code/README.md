@@ -72,7 +72,7 @@ The shaders dataset and reconstructions that we train on can be found [here](htt
 
 
 ## Bibtex 
-
+If you find this code useful in your research, consider citing our work:
 ```
 @misc{rajan2024effectivenessdatasetalignmentfake,
       title={On the Effectiveness of Dataset Alignment for Fake Image Detection}, 
