@@ -71,7 +71,7 @@ By default the code creates a folder called checkpoints in the current directory
 The shaders dataset and reconstructions that we train on can be found [here](https://drive.google.com/file/d/1C6hTqXpsLlZV8GCLVvZwJtqCvfn-BLS0/view?usp=sharing). We use the same validation set as used in the other expriments, we compute the evaluation threshold on a random subset of 5000 real and fake images taken from the validation data. 
 
 
-## Bibtex 
+## Citation
 If you find this code useful in your research, consider citing our work:
 ```
 @misc{rajan2024effectivenessdatasetalignmentfake,
