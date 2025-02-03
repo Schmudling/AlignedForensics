@@ -3,7 +3,7 @@ import subprocess
 n1 = 'sdpure_real.csv'
 n2 = 'sdpure_fake.csv'
 wdir = './weights/'
-models = 'ours,ours-sync'
+models = 'ours-sync'
 commands = [
     f"python main.py --in_csv data/{n1} --out_csv output/{n1} --device 'cuda:4' --weights_dir {wdir} --models {models}",
     f"python main.py --in_csv data/{n2} --out_csv output/{n2} --device 'cuda:5' --weights_dir {wdir} --models {models}",
