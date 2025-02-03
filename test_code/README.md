@@ -3,7 +3,7 @@
 We use the testing pipeline provided by [CLIPDet](https://github.com/grip-unina/ClipBased-SyntheticImageDetection). We test on a wide variety of real and synthetic images. We make the dataset public on huggingface at this [link](https://huggingface.co/datasets/AniSundar18/Robust_LDM_Benchmark). 
 
 ## Evaluation Procedure 
-The models need to be saved in a specific way, please refer to the ```weights``` folder for an example,
+To run inference with the models, we need to refer to their path in the config file. An example of one such config file is present in the ```weights``` folder. The config file needs to be edited such that, file_path stores the path to the model weights.
 
 To evaluate our models on the datsets, the path containing the image should be converted into a csv file. We provide a script in order to do that,
 
