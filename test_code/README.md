@@ -2,20 +2,32 @@
 
 We use the testing pipeline provided by [CLIPDet](https://github.com/grip-unina/ClipBased-SyntheticImageDetection). We test on a wide variety of real and synthetic images. We make the dataset public on huggingface at this [link](https://huggingface.co/datasets/AniSundar18/Robust_LDM_Benchmark). 
 
-## Evaluation Procedure 
-To run inference with the models, we need to refer to their path in the config file. An example of one such config file is present in the ```weights``` folder. The config file needs to be edited such that, file_path stores the path to the model weights.
+## **Evaluation Procedure**  
+To run inference with the models, you must specify their paths in a configuration file. An example configuration file is provided in the `weights` folder. Before running the evaluation, update the configuration file by setting `file_path` to the appropriate model weights.  
 
-To evaluate our models on the datsets, the path containing the image should be converted into a csv file. We provide a script in order to do that,
+### **Preparing the Dataset**  
 
-```
-python create_csv.py --base_folder "path to image folder" --output_csv "output csv path" --dir "real/fake (optional)"
+To evaluate the models, the image folder paths need to be converted into a CSV file. We provide a script to automate this process:  
+
+```bash
+python create_csv.py --base_folder "path_to_image_folder" --output_csv "output_csv_path" --dir "real/fake (optional)"
 ```
 
-Once the datasets are ready, the per-image scores can be calculated as follows,
+### **Running Inference**  
+
+Once the dataset is prepared, you can compute per-image scores using the following command:  
+
+```bash
+python main.py --in_csv {images_csv_file} --out_csv {output_csv_file} --device "cuda:4" --weights_dir {weights_directory} --models {models_to_evaluate}
 ```
-python main.py --in_csv {images csv file} --out_csv {output csv file} --device 'cuda:4' --weights_dir {weights directory} --models {models to evalute}
+
+To run multiple evaluations in parallel, use the `run_tests.py` script. The resulting CSV files will contain the scores assigned by the neural networks (represented in the column names). These scores indicate the likelihood of an image being fake.  
+
+The probability of an image being fake can be obtained by applying a sigmoid function to the score. We provide a script to evaluate accuracy and average precision for a set of real and fake images using their respective CSV files:  
+
+```bash
+python eval.py --real {path_to_real_csv} --fake {path_to_fake_csv} --ix {number_of_detectors_to_evaluate}
 ```
-In order to run these evaluations parallely, use the ```run_tests.py``` script. The returned csv files contains the scores given by the neural networks. 
 
 ## Resolution/Compression sweeps
 We also provide the code to recreate the resolution/webp-compression diagrams given in the paper. Examples can be found in the ```sweep.sh``` script. 
