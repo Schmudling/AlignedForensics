@@ -1,4 +1,4 @@
-# Aligned Datasets Improve Detection of Latent Diffusion-Generated Images
+# Improved Detection of Latent Diffusion-Generated Images through Aligned Datasets
 
 Official repository of [Improved Detection of Latent Diffusion-Generated Images through Aligned Datasets](https://arxiv.org/abs/2410.11835). The specific instructions for training the models and reproducing the plots can be found in the **training_code** and **testing_code** directories.
 
