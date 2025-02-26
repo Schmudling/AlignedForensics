@@ -1,6 +1,6 @@
 # Aligned Datasets Improve Detection of Latent Diffusion-Generated Images
 
-Official repository of [On the Effectiveness of Dataset Alignment for Fake Image Detection](https://arxiv.org/abs/2410.11835). The specific instructions for training the models and reproducing the plots can be found in the **training_code** and **testing_code** directories.
+Official repository of [Improved Detection of Latent Diffusion-Generated Images through Aligned Datasets](https://arxiv.org/abs/2410.11835). The specific instructions for training the models and reproducing the plots can be found in the **training_code** and **testing_code** directories.
 
 ## Pretrained Models
 
