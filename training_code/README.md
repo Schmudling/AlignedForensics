@@ -74,10 +74,10 @@ The shaders dataset and reconstructions that we train on can be found [here](htt
 ## Citation
 If you find this code useful in your research, consider citing our work:
 ```
-@misc{rajan2024effectivenessdatasetalignmentfake,
-      title={On the Effectiveness of Dataset Alignment for Fake Image Detection}, 
+@misc{rajan2025aligneddatasetsimprovedetection,
+      title={Aligned Datasets Improve Detection of Latent Diffusion-Generated Images}, 
       author={Anirudh Sundara Rajan and Utkarsh Ojha and Jedidiah Schloesser and Yong Jae Lee},
-      year={2024},
+      year={2025},
       eprint={2410.11835},
       archivePrefix={arXiv},
       primaryClass={cs.CV},
