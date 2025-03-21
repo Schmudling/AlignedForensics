@@ -21,8 +21,8 @@ def create_csv_from_folder(base_folder, output_csv, dir=''):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a CSV file from images in a folder.")
-    parser.add_argument("base_folder", type=str, help="Path to the base folder containing images.")
-    parser.add_argument("output_csv", type=str, help="Output CSV file path.")
+    parser.add_argument("--base_folder", type=str, help="Path to the base folder containing images.")
+    parser.add_argument("--output_csv", type=str, help="Output CSV file path.")
     parser.add_argument("--dir", type=str, default='', help="Optional type label for the images.")
 
     args = parser.parse_args()
